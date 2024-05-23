@@ -60,6 +60,17 @@ namespace LastChance.Controllers
                 return "ERROR";
             }
         }
+        [HttpGet]
+        [Route("check")]
+        public string Check()
+        {
+            var userId = _signInManager.UserManager.GetUserId(User);
+            if (userId == null)
+            {
+                return "NOT";
+            }
+            return "YYYYEEEESS";
+        }
 
         [HttpPost]
         [Route("logout")]
