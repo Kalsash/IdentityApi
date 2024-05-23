@@ -10,11 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
+builder.Services.AddAuthorization();
 
 builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationContext>();
 
 var app = builder.Build();
+
+//app.MapIdentityApi<User>();
 
 app.UseAuthentication();    // подключение аутентификации
 
@@ -25,6 +28,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-//app.MapIdentityApi<User>();
+
 
 app.Run();

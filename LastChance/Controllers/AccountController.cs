@@ -44,5 +44,30 @@ namespace LastChance.Controllers
                     return "ERROR";
                 }
         }
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<string> Login(ProUser model)
+        {
+            var result =
+                await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);
+            if (result.Succeeded)
+            {
+                return model.Email;
+            }
+            else
+            {
+                return "ERROR";
+            }
+        }
+
+        [HttpPost]
+        [Route("logout")]
+        public async Task<string> Logout()
+        {
+            //// удаляем аутентификационные куки
+            await _signInManager.SignOutAsync();
+            return "logout";
+        }
     }
 }
