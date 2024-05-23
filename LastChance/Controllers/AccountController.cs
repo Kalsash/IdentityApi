@@ -24,16 +24,16 @@ namespace LastChance.Controllers
         }
         [HttpPost]
         [Route("register")]
-        public async Task<string> Register(ProUser u)
+        public async Task<User> Register(ProUser u)
         {
-                User user = new User { Email = u.Email, UserName = u.Email, Year = u.Year };
+                User user = new User { Email = u.Email, UserName = u.Email, Address = u.Address, Phone = u.Phone };
                 // добавляем пользователя
                 var result = await _userManager.CreateAsync(user, u.Password);
                 if (result.Succeeded)
                 {
                     // установка куки
                     await _signInManager.SignInAsync(user, false);
-                    return "OK";
+                    return user;
                 }
                 else
                 {
@@ -41,7 +41,7 @@ namespace LastChance.Controllers
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
-                    return "ERROR";
+                    return new User { };
                 }
         }
 
