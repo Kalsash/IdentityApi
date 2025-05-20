@@ -24,7 +24,7 @@ namespace LastChance.Controllers
         }
         [HttpPost]
         [Route("register")]
-        public async Task<User> Register(ProUser u)
+        public async Task<User> Register(Person u)
         {
                 User user = new User { Email = u.Email, UserName = u.Email, Address = u.Address, Phone = u.Phone };
                 // добавляем пользователя
@@ -47,7 +47,7 @@ namespace LastChance.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<string> Login(ProUser model)
+        public async Task<string> Login(Person model)
         {
             var result =
                 await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, false);

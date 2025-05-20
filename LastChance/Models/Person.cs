@@ -2,7 +2,7 @@
 
 namespace LastChance.Models
 {
-    public class ProUser:User
+    public class Person:User
     {
         [Required]
         [DataType(DataType.Password)]
